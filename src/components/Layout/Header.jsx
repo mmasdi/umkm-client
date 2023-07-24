@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <header className="sticky items-center px-5 justify-between bg-white z-10 border-b-[1px] top-0 h-12 flex">
       <Drawer opened={opened} onClose={close} title="Cart">
-        Test
+        
       </Drawer>
 
       <Link href="/" className="font-medium text-primary cursor-pointer">

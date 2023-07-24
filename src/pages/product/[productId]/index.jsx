@@ -30,7 +30,16 @@ function ProductDetail({ product }) {
             <p>Total</p>
             <h1 className="font-bold text-2xl">Rp. {product.price}</h1>
           </div>
-          <button className="text-sm bg-warning transition-colors hover:bg-warning-focus py-1 text-white rounded-md">
+          <button onClick={()=> {
+            
+            let productOld = localStorage.getItem('cart');
+            let newProd = [];
+            if(productOld){
+              newProd = [...productOld, product]
+            }
+
+            localStorage.setItem('cart', newProd);
+          }} className="text-sm bg-warning transition-colors hover:bg-warning-focus py-1 text-white rounded-md">
             Tambah Keranjang
           </button>
           {session?.data?.user ? (

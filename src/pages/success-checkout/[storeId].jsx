@@ -1,8 +1,9 @@
+import StoreAPI from "@/network/features/store.api";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import React from "react";
 
-function SuccessCheckout() {
+function SuccessCheckout({store}) {
   const router = useRouter();
   return (
     <section className="w-full flex self-start justify-center">
@@ -21,13 +22,28 @@ function SuccessCheckout() {
           >
             Lihat Pesanan
           </button>
-          <button className="bg-success text-white py-2 px-4 rounded-lg">
+          <a href={`https://wa.me/62${store.noTlp.slice(1)}`} className="bg-success text-white py-2 px-4 rounded-lg">
             Hubungi Toko
-          </button>
+          </a>
         </div>
       </div>
     </section>
   );
+}
+
+
+export async function getServerSideProps(context) {
+  try {
+    const { storeId } = context.query;
+    const store = await StoreAPI.getOne(storeId);
+    return {
+      props: { store },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default SuccessCheckout;
