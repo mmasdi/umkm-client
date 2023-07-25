@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import InputText from "@/components/InputText/InputText";
 import ProductAPI, { productEndPoint } from "@/network/features/product.api";
 import Link from "next/link";
+import { redirect } from "next/dist/server/api-utils";
 
 export default function Home() {
   const session = useSession();
@@ -28,9 +29,10 @@ export default function Home() {
     navigator.geolocation.getCurrentPosition(function (position) {
       setGeo({ lat: position.coords.latitude, lng: position.coords.longitude });
     });
+
+ 
   }, []);
 
-  // if (loadingProducts) return <p className="text-center m-8">Loading..</p>;
 
   return (
     <main className="p-5">
